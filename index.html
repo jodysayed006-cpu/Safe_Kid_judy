@@ -21,13 +21,14 @@
 <div id="qrSection">
     <h2>Your Bracelet QR</h2>
 
-   <img
-    src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=SK1001"
-    width="250"
-    height="250"
-    alt="Safe Kid QR Code">
+    <img
+        id="qrImage"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=SK1001"
+        width="250"
+        height="250"
+        alt="Safe Kid QR Code">
 
-    <p id="qrStatus">Generating QR Code...</p>
+    <p>📱 Scan this QR code for emergency information.</p>
 
     <p id="braceletText"></p>
 </div>
@@ -36,12 +37,10 @@
 const child = JSON.parse(localStorage.getItem("childData"));
 
 if (child && child.id) {
-    document.getElementById("qrImage").src =
-        "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=SK1001";
-
     document.getElementById("braceletText").innerText =
         "Bracelet ID: " + child.id;
 }
 </script>
+
 </body>
 </html>
