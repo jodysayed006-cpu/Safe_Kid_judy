@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Kid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>🛡️ SAFE KID</h1>
+
+<p><b>Smart Child Safety Bracelet</b></p>
+<p>Protecting Children, One Scan Away ❤️</p>
+
+<a href="register.html">
+    <button>Register Child</button>
+</a>
+
+<div id="qrSection" style="display:none;">
+    <h2>Your Bracelet QR</h2>
+
+    <img id="qrImage" width="200" alt="Child QR Code">
+
+    <p>
+        <b>📱 Scan this QR code to access emergency child information.</b>
+    </p>
+
+    <p id="braceletText"></p>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+const child = JSON.parse(localStorage.getItem("childData"));
+
+if (child && child.id) {
+
+    document.getElementById("qrSection").style.display = "block";
+
+    const childPage =
+        window.location.origin +
+        window.location.pathname.replace("index.html", "") +
+        "child.html?id=" +
+        encodeURIComponent(child.id);
+
+    document.getElementById("qrImage").src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" +
+        encodeURIComponent(childPage);
+
+    document.getElementById("braceletText").innerText =
+        "Bracelet ID: " + child.id;
+}
+</script>
+
+</body>
+</html>
