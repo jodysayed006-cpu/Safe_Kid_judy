@@ -1,54 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Child Information - Safe Kid</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Information - Safe Kid</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🚨 Emergency Child Information</h1>
+<h1>🚨 SAFE KID</h1>
+
+<p><b>Emergency Child Information</b></p>
 
 <div id="childData"></div>
-<p><b>If you found this child, please contact the parent immediately.</b></p>
+
 <a id="callButton">
-    <button>Call Parent</button>
+    <button>📞 Call Parent</button>
 </a>
-    <script src="script.js"></script>
-    <script>
-const AIRTABLE_TOKEN = "patjKHqsCHcNCVtEZ.d7f3763c6751d0d348c8067237de8b7e8557ecdd81b2f9b52d90335d12e32880";
-const BASE_ID = "appXixEqsUvtkDjJN";
-const TABLE_NAME = "Table 1";
+
+<p><b>If you found this child, please contact the parent immediately.</b></p>
+
+<script>
 
 const params = new URLSearchParams(window.location.search);
-const childID = params.get("id");
 
-fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}?filterByFormula={childID}="${childID}"`, {
-  headers: {
-    Authorization: "Bearer " + AIRTABLE_TOKEN
-  }
-})
-.then(res => res.json())
-.then(data => {
-  if (data.records.length > 0) {
-    let child = data.records[0].fields;
+const id = params.get("id");
+const name = params.get("name");
+const age = params.get("age");
+const blood = params.get("blood");
+const allergy = params.get("allergy");
+const medical = params.get("medical");
+const parent = params.get("parent");
+const phone = params.get("phone");
+
+if (id && name) {
 
     document.getElementById("childData").innerHTML =
-      "ID: " + child.childID + "<br>" +
-      "Name: " + child.childName + "<br>" +
-      "Age: " + child.age + "<br>" +
-      "Blood Type: " + child.bloodType + "<br>" +
-      "Allergies: " + child.allergies + "<br>" +
-      "Medical Condition: " + child.medicalCondition + "<br>" +
-      "Parent Name: " + child.parentName + "<br>" +
-      "Phone: " + child.parentPhone + "<br>" +
-      "Address: " + child.address;
+        "<b>Bracelet ID:</b> " + id + "<br>" +
+        "<b>Name:</b> " + name + "<br>" +
+        "<b>Age:</b> " + age + "<br>" +
+        "<b>Blood Type:</b> " + blood + "<br>" +
+        "<b>Allergies:</b> " + allergy + "<br>" +
+        "<b>Medical Condition:</b> " + medical + "<br>" +
+        "<b>Parent:</b> " + parent;
 
-    document.getElementById("callButton").href = "tel:" + child.parentPhone;
-  } else {
-    document.getElementById("childData").innerHTML = "Child not found.";
-  }
-});
+    document.getElementById("callButton").href =
+        "tel:" + phone;
+
+} else {
+
+    document.getElementById("childData").innerHTML =
+        "❌ Child information not found.";
+
+}
+
 </script>
+
 </body>
 </html>
