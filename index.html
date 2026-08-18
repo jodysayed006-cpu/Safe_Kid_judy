@@ -18,22 +18,22 @@
     <button>Register Child</button>
 </a>
 
-<div id="qrSection" style="display:none;">
+<div id="qrSection">
     <h2>Your Bracelet QR</h2>
 
-    <img id="qrImage" width="250" height="250">
+    <img id="qrImage"
+         width="250"
+         height="250"
+         alt="Safe Kid QR Code">
 
-    <p><b>📱 Scan the QR code for emergency information.</b></p>
+    <p>📱 Scan this QR code for emergency information.</p>
 
     <p id="braceletText"></p>
 </div>
-
 <script>
 const child = JSON.parse(localStorage.getItem("childData"));
 
 if (child && child.id) {
-
-    document.getElementById("qrSection").style.display = "block";
 
     const childURL =
         "https://jodysayed006-cpu.github.io/Safe_Kid_judy/child.html?id=" +
@@ -43,10 +43,7 @@ if (child && child.id) {
         "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" +
         encodeURIComponent(childURL);
 
-    const qrImage = document.getElementById("qrImage");
-
-    qrImage.src = qrURL;
-    qrImage.style.display = "block";
+    document.getElementById("qrImage").src = qrURL;
 
     document.getElementById("braceletText").innerText =
         "Bracelet ID: " + child.id;
