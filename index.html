@@ -21,12 +21,9 @@
 <div id="qrSection" style="display:none;">
     <h2>Your Bracelet QR</h2>
 
-    <img id="qrImage"
-         width="250"
-         height="250"
-         alt="QR Code">
+    <img id="qrImage" width="250" height="250">
 
-    <p><b>📱 Scan this QR code for emergency information.</b></p>
+    <p><b>📱 Scan the QR code for emergency information.</b></p>
 
     <p id="braceletText"></p>
 </div>
@@ -39,23 +36,19 @@ if (child && child.id) {
     document.getElementById("qrSection").style.display = "block";
 
     const childURL =
-        "https://jodysayed006-cpu.github.io/Safe_Kid_judy/child.html?" +
-        new URLSearchParams({
-            id: child.id,
-            name: child.name,
-            age: child.age,
-            blood: child.blood,
-            allergy: child.allergy,
-            medical: child.medical,
-            parent: child.parent,
-            phone: child.phone
-        }).toString();
+        "https://jodysayed006-cpu.github.io/Safe_Kid_judy/child.html" +
+        "?id=" + encodeURIComponent(child.id) +
+        "&name=" + encodeURIComponent(child.name) +
+        "&age=" + encodeURIComponent(child.age) +
+        "&blood=" + encodeURIComponent(child.blood) +
+        "&allergy=" + encodeURIComponent(child.allergy) +
+        "&medical=" + encodeURIComponent(child.medical) +
+        "&parent=" + encodeURIComponent(child.parent) +
+        "&phone=" + encodeURIComponent(child.phone);
 
-    const qrURL =
+    document.getElementById("qrImage").src =
         "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" +
         encodeURIComponent(childURL);
-
-    document.getElementById("qrImage").src = qrURL;
 
     document.getElementById("braceletText").innerText =
         "Bracelet ID: " + child.id;
