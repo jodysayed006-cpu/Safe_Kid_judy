@@ -24,16 +24,31 @@
     <img id="qrImage"
          width="250"
          height="250"
-         alt="Safe Kid QR Code">
+         alt="QR Code">
 
-    <p>📱 Scan this QR code for emergency information.</p>
+    <p id="qrStatus">Generating QR Code...</p>
 
     <p id="braceletText"></p>
 </div>
-<script>
-const child = JSON.parse(localStorage.getItem("childData"));
 
-if (child && child.id) {
+<script>
+window.addEventListener("load", function () {
+
+    const saved = localStorage.getItem("childData");
+
+    if (!saved) {
+        document.getElementById("qrStatus").innerText =
+            "No child data saved yet.";
+        return;
+    }
+
+    const child = JSON.parse(saved);
+
+    if (!child.id) {
+        document.getElementById("qrStatus").innerText =
+            "No Bracelet ID found.";
+        return;
+    }
 
     const childURL =
         "https://jodysayed006-cpu.github.io/Safe_Kid_judy/child.html?id=" +
@@ -43,11 +58,24 @@ if (child && child.id) {
         "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" +
         encodeURIComponent(childURL);
 
-    document.getElementById("qrImage").src = qrURL;
+    const qrImage = document.getElementById("qrImage");
+
+    qrImage.onload = function () {
+        document.getElementById("qrStatus").innerText =
+            "✅ QR Code Ready!";
+    };
+
+    qrImage.onerror = function () {
+        document.getElementById("qrStatus").innerText =
+            "❌ QR Code could not load.";
+    };
+
+    qrImage.src = qrURL;
 
     document.getElementById("braceletText").innerText =
         "Bracelet ID: " + child.id;
-}
+});
 </script>
+
 </body>
 </html>
