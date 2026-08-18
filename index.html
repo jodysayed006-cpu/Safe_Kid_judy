@@ -36,24 +36,21 @@ if (child && child.id) {
     document.getElementById("qrSection").style.display = "block";
 
     const childURL =
-        "https://jodysayed006-cpu.github.io/Safe_Kid_judy/child.html" +
-        "?id=" + encodeURIComponent(child.id) +
-        "&name=" + encodeURIComponent(child.name) +
-        "&age=" + encodeURIComponent(child.age) +
-        "&blood=" + encodeURIComponent(child.blood) +
-        "&allergy=" + encodeURIComponent(child.allergy) +
-        "&medical=" + encodeURIComponent(child.medical) +
-        "&parent=" + encodeURIComponent(child.parent) +
-        "&phone=" + encodeURIComponent(child.phone);
+        "https://jodysayed006-cpu.github.io/Safe_Kid_judy/child.html?id=" +
+        encodeURIComponent(child.id);
 
-    document.getElementById("qrImage").src =
+    const qrURL =
         "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" +
         encodeURIComponent(childURL);
+
+    const qrImage = document.getElementById("qrImage");
+
+    qrImage.src = qrURL;
+    qrImage.style.display = "block";
 
     document.getElementById("braceletText").innerText =
         "Bracelet ID: " + child.id;
 }
 </script>
-
 </body>
 </html>
