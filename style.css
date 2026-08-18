@@ -98,3 +98,10 @@ button:hover {
         height: 180px;
     }
 }
+#qrImage {
+    display: block !important;
+    width: 250px !important;
+    height: 250px !important;
+    margin: 20px auto !important;
+    visibility: visible !important;
+}
