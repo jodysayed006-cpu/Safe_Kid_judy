@@ -3,58 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Information - Safe Kid</title>
+    <title>Safe Kid - Child Information</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🚨 SAFE KID</h1>
+<h1>🛡️ SAFE KID</h1>
 
-<p><b>Emergency Child Information</b></p>
+<h2>Emergency Child Information</h2>
 
-<div id="childData"></div>
-
-<a id="callButton">
-    <button>📞 Call Parent</button>
-</a>
-
-<p><b>If you found this child, please contact the parent immediately.</b></p>
+<div id="info">
+    Loading...
+</div>
 
 <script>
-
 const params = new URLSearchParams(window.location.search);
 
 const id = params.get("id");
-const name = params.get("name");
-const age = params.get("age");
-const blood = params.get("blood");
-const allergy = params.get("allergy");
-const medical = params.get("medical");
-const parent = params.get("parent");
-const phone = params.get("phone");
 
-if (id && name) {
+if (id) {
 
-    document.getElementById("childData").innerHTML =
-        "<b>Bracelet ID:</b> " + id + "<br>" +
-        "<b>Name:</b> " + name + "<br>" +
-        "<b>Age:</b> " + age + "<br>" +
-        "<b>Blood Type:</b> " + blood + "<br>" +
-        "<b>Allergies:</b> " + allergy + "<br>" +
-        "<b>Medical Condition:</b> " + medical + "<br>" +
-        "<b>Parent:</b> " + parent;
-
-    document.getElementById("callButton").href =
-        "tel:" + phone;
+    document.getElementById("info").innerHTML =
+        "<h3>Bracelet ID: " + id + "</h3>" +
+        "<p>✅ Safe Kid bracelet detected.</p>" +
+        "<p>Please contact the child's parent.</p>";
 
 } else {
 
-    document.getElementById("childData").innerHTML =
-        "❌ Child information not found.";
-
+    document.getElementById("info").innerHTML =
+        "<p>❌ No Bracelet ID found.</p>";
 }
-
 </script>
 
 </body>
