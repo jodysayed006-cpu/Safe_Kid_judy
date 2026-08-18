@@ -10,6 +10,7 @@
 <body>
 
 <h1>🛡️ SAFE KID</h1>
+
 <p><b>Smart Child Safety Bracelet</b></p>
 <p>Protecting Children, One Scan Away ❤️</p>
 
@@ -20,7 +21,10 @@
 <div id="qrSection" style="display:none;">
     <h2>Your Bracelet QR</h2>
 
-    <img id="qrImage" width="250">
+    <img id="qrImage"
+         width="250"
+         height="250"
+         alt="QR Code">
 
     <p><b>📱 Scan this QR code for emergency information.</b></p>
 
@@ -30,28 +34,28 @@
 <script>
 const child = JSON.parse(localStorage.getItem("childData"));
 
-if (child) {
+if (child && child.id) {
 
     document.getElementById("qrSection").style.display = "block";
 
-    const params = new URLSearchParams({
-        id: child.id,
-        name: child.name,
-        age: child.age,
-        blood: child.blood,
-        allergy: child.allergy,
-        medical: child.medical,
-        parent: child.parent,
-        phone: child.phone
-    });
-
     const childURL =
         "https://jodysayed006-cpu.github.io/Safe_Kid_judy/child.html?" +
-        params.toString();
+        new URLSearchParams({
+            id: child.id,
+            name: child.name,
+            age: child.age,
+            blood: child.blood,
+            allergy: child.allergy,
+            medical: child.medical,
+            parent: child.parent,
+            phone: child.phone
+        }).toString();
 
-    document.getElementById("qrImage").src =
+    const qrURL =
         "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" +
         encodeURIComponent(childURL);
+
+    document.getElementById("qrImage").src = qrURL;
 
     document.getElementById("braceletText").innerText =
         "Bracelet ID: " + child.id;
